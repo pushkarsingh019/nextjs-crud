@@ -46,7 +46,7 @@ function GetNotes(){
     <div>
       {data.map((note) => {
         return (
-          <div>
+          <div key={note._id}>
             <h3>{note.title}</h3>
             <p>{note.data}</p>  
           </div>
