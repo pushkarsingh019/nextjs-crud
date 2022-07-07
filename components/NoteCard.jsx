@@ -19,6 +19,8 @@ function NoteCard({id, title, data}){
                 id
             }
         })
+
+        router.push('/');
     };
 
     function updatePost(){
@@ -31,6 +33,8 @@ function NoteCard({id, title, data}){
                 data : postText,
             }
         )
+
+        router.replace(router.asPath);
     }
 
     return (
