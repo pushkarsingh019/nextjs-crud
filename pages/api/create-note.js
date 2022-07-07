@@ -1,7 +1,7 @@
 import NOTE from "../../models/postModel";
 import ConnectDB from "../../config/database";
 
-ConnectDB();
+ConnectDB()
 
 async function createNote(req, res) {
     try {
@@ -10,8 +10,10 @@ async function createNote(req, res) {
             title,
             data
         });
+        console.log("note added");
         res.status(201).json({ success: true, data: newNote });
     } catch (error) {
+        console.log("not addition failed");
         res.status(500).json({success : false, data : error.message})
     }
 }
