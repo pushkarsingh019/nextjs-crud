@@ -2,29 +2,10 @@ import NewNote from "../components/NewNote";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NoteCard from "../components/NoteCard";
-
-// export async function getStaticProps(){
-//   try {
-//     const response = await axios.get('/api/get-posts');
-//     const {status, data} = response;
-//     console.log("Data fetched from the backend");
-//     return {
-//       props : {
-//         data,
-//       }
-//     }
-//   } catch (error) {
-//     console.log(`could not fetch data -> ${error.message}`);
-//     let data = error.message;
-//     return {
-//       props : {
-//         data
-//       }
-//     }
-//   }
-// }
+import { useRouter } from "next/router";
 
 function GetNotes(){
+
 
   const [notes, setNotes] = useState([]);
   const [isLoading, setLoading]  = useState(false);
@@ -56,7 +37,6 @@ function GetNotes(){
 
 
 function Home(){
-
   
 
   return(
