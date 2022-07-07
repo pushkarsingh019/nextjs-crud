@@ -1,6 +1,7 @@
 import NewNote from "../components/NewNote";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import NoteCard from "../components/NoteCard";
 
 // export async function getStaticProps(){
 //   try {
@@ -46,10 +47,7 @@ function GetNotes(){
     <div>
       {data.map((note) => {
         return (
-          <div key={note._id}>
-            <h3>{note.title}</h3>
-            <p>{note.data}</p>  
-          </div>
+          <NoteCard key={note._id} title={note.title} data={note.data} id={note._id} />
         )
       })}
     </div>
