@@ -5,11 +5,13 @@ import NoteCard from "../components/NoteCard";
 import { useRouter } from "next/router";
 import connectDB from "../config/database";
 
+const NODE_ENV = "production";
+
 export async function getStaticProps() {
-  const res = await fetch("https://notes-e2yrj53p8-pushkarsingh019.vercel.app/api/get-posts");
+  const url = NODE_ENV === "development" ? "http://localhost:3000/api/get-posts" : "https://notes-app-crud.vercel.app/api/get-posts"
+  const res = await fetch(url);
   const data = await res.json();
   const posts = data.data;
-  console.log(posts)
   return {
     props: {
       posts,
