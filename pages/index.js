@@ -6,9 +6,10 @@ import { useRouter } from "next/router";
 import connectDB from "../config/database";
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/get-posts");
+  const res = await fetch("https://notes-e2yrj53p8-pushkarsingh019.vercel.app/api/get-posts");
   const data = await res.json();
   const posts = data.data;
+  console.log(posts)
   return {
     props: {
       posts,
