@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import {useRouter} from "next/router";
 
 function NewNote() {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
 
@@ -14,7 +12,6 @@ function NewNote() {
         data : note
     }
     axios.post('/api/create-note', noteData);
-    router.push('/');
   }
 
   return (

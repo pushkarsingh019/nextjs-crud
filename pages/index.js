@@ -3,33 +3,48 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import NoteCard from "../components/NoteCard";
 import { useRouter } from "next/router";
-import connectDB from "../config/database";
 
-export async function getStaticProps() {
-  const res = await fetch("https://notes-e2yrj53p8-pushkarsingh019.vercel.app/api/get-posts");
-  const data = await res.json();
-  const posts = data.data;
-  console.log(posts)
-  return {
-    props: {
-      posts,
-    },
+function GetNotes(){
 
-    revalidate: 1,
-  };
-}
 
-function Home({ posts }) {
-  const router = useRouter();
+  const [notes, setNotes] = useState([]);
+  const [isLoading, setLoading]  = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/get-posts')
+    .then((res) => res.json())
+    .then((note) => {
+      setNotes(note)
+      setLoading(false);
+    })
+  }, []);
+
+  if(isLoading) return <p>Loading...</p>
+  if(notes.length === 0) return <p>No Notes Found</p>
+  const {data} = notes;
 
   return (
+    <div>
+      {data.map((note) => {
+        return (
+          <NoteCard key={note._id} title={note.title} data={note.data} id={note._id} />
+        )
+      })}
+    </div>
+  )
+}
+
+
+function Home(){
+  
+
+  return(
     <>
       <NewNote />
-      {posts.map((post) => {
-        return <NoteCard key={post._id} title={post.title} data={post.data} id={post._id} />
-      })}
+      <GetNotes />
     </>
-  );
-}
+  )
+};
 
 export default Home;
